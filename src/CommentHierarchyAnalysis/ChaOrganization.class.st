@@ -46,7 +46,7 @@ Class {
 		'classes',
 		'packages'
 	],
-	#category : #CommentHierarchyAnalysis
+	#category : #'CommentHierarchyAnalysis-External'
 }
 
 { #category : #'instance creation' }

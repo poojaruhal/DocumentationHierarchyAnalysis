@@ -9,7 +9,7 @@ Class {
 		'comment',
 		'classDepth'
 	],
-	#category : #CommentHierarchyAnalysis
+	#category : #'CommentHierarchyAnalysis-External'
 }
 
 { #category : #accessing }
@@ -82,7 +82,7 @@ ChaClass >> hasSubclasses [
 ]
 
 { #category : #testing }
-ChaClass >> isObject [
+ChaClass >> isChaObject [
 	^ #(Object ProtoObject) includes: self name
 ]
 

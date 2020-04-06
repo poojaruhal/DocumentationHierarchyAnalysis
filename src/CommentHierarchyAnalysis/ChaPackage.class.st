@@ -28,10 +28,12 @@ ChaPackage >> classes: anObject [
 ChaPackage >> classesWithHierarchy [
 	^ self classes
 		reject: [ :eachClass | 
-			(eachClass superclass isNil or: [ eachClass superclass isChaObject
-				or: [
-					"superclass is from the other project"
-					(self classes includes: eachClass superclass) not ] ])
+			(eachClass superclass isNil 
+				or: 
+					[ eachClass superclass isChaObject
+						or: [
+							"superclass is from the other project"
+							(self classes includes: eachClass superclass) not ] ])
 			and: [
 				"we don't have subclasses in the same project"
 				(eachClass subclasses select: [ :eachSubclass | self classes includes: eachSubclass ]) isEmpty ] ]

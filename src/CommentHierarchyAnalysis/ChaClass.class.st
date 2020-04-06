@@ -7,7 +7,8 @@ Class {
 		'superclass',
 		'package',
 		'comment',
-		'classDepth'
+		'classDepth',
+		'projectLevel'
 	],
 	#category : #'CommentHierarchyAnalysis-External'
 }
@@ -24,6 +25,15 @@ ChaClass >> allSuperclasses [
 				aStream nextPut: aCurrentClass.
 				aCurrentClass := aCurrentClass superclass ].
 		aStream ]
+]
+
+{ #category : #accessing }
+ChaClass >> calculateProjectLevel [
+	self isSuperclassInAnotherProject 
+		ifTrue: [ self projectLevel: 1 ]
+		ifFalse: [ 
+			self projectLevel: ((self superclass projectLevel)+1)].
+		^ self projectLevel.
 ]
 
 { #category : #accessing }
@@ -86,6 +96,26 @@ ChaClass >> isChaObject [
 	^ #(Object ProtoObject) includes: self name
 ]
 
+{ #category : #testing }
+ChaClass >> isLeafClassInProject [
+	^ (self isSubclassInAnotherProject)
+]
+
+{ #category : #testing }
+ChaClass >> isSubclassInAnotherProject [
+"we don't have subclasses in the same project"
+				^ (self subclasses isEmpty) or: [(self subclasses select: [ :eachSubclass | self package classes includes: eachSubclass ]) isEmpty] 
+]
+
+{ #category : #testing }
+ChaClass >> isSuperclassInAnotherProject [
+"superclass is from another project"
+	^ ((self superclass isNil)
+	or:
+	[self superclass isChaObject 
+			or: [(self package classes includes: self superclass) not]]).
+]
+
 { #category : #accessing }
 ChaClass >> name [
 	^ name
@@ -109,6 +139,16 @@ ChaClass >> package: anObject [
 { #category : #printing }
 ChaClass >> printOn: aStream [
 	aStream nextPutAll: self name
+]
+
+{ #category : #accessing }
+ChaClass >> projectLevel [
+	^ projectLevel
+]
+
+{ #category : #accessing }
+ChaClass >> projectLevel: aNumber [ 
+	projectLevel := aNumber.
 ]
 
 { #category : #accessing }

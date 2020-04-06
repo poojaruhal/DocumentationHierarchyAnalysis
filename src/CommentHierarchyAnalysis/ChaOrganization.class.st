@@ -50,7 +50,7 @@ Class {
 }
 
 { #category : #'instance creation' }
-ChaOrganization class >> fromData: aPharoData [
+ChaOrganization class >> fromEnvironment: aPharoData [
 	"aPharoData a collection of dictionaries"
 	| anOrganization |
 	
@@ -65,7 +65,7 @@ ChaOrganization class >> fromData: aPharoData [
 		aClass classDepth: (each at: #depth).
 		aClass package: aPackage.
 		aClass comment:  (each at: #comment).
-		
+		aClass projectLevel: 0.
 		(each at: #superclass) ifNotNil: [ :aSuperclassName |
 			aClass superclass: (anOrganization classNamed: aSuperclassName) ].
 		aClass subclasses: ((each at: #subclasses) collect: [ :eachName | anOrganization classNamed: eachName ]).

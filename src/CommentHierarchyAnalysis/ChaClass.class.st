@@ -102,6 +102,11 @@ ChaClass >> isLeafClassInProject [
 ]
 
 { #category : #testing }
+ChaClass >> isRootClassInProject [
+	^ (self isSuperclassInAnotherProject)
+]
+
+{ #category : #testing }
 ChaClass >> isSubclassInAnotherProject [
 "we don't have subclasses in the same project"
 				^ (self subclasses isEmpty) or: [(self subclasses select: [ :eachSubclass | self package classes includes: eachSubclass ]) isEmpty] 
@@ -149,6 +154,18 @@ ChaClass >> projectLevel [
 { #category : #accessing }
 ChaClass >> projectLevel: aNumber [ 
 	projectLevel := aNumber.
+]
+
+{ #category : #accessing }
+ChaClass >> statusRootOrIntermediateOrLeaf [
+	|status|
+	self isRootClassInProject 
+		ifTrue: [  status := 'root' ]
+		ifFalse: [ self isLeafClassInProject 
+			ifTrue:[ status:= 'leaf' ]
+			ifFalse: [ status := 'intermediate' ]
+			]. 
+		^ status
 ]
 
 { #category : #accessing }

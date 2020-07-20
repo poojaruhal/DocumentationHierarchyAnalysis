@@ -1,3 +1,6 @@
+"
+Get all classes, packages and package groups of Smalltalk image.
+"
 Class {
 	#name : #ChaImageOrganization,
 	#superclass : #ChaOrganization,

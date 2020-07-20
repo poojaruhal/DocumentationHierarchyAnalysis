@@ -82,6 +82,15 @@ Class >> isTestClass [
 ]
 
 { #category : #'*CommentHierarchyAnalysis' }
+Class >> sampleInstancePragamsMethods [
+	|sampleInstancePragams|
+	sampleInstancePragams := OrderedCollection new.
+	sampleInstancePragams add: (self methods select: [:aMethod |  aMethod hasPragmaNamed: #sampleInstance ]).
+	sampleInstancePragams add: (self classSide methods select: [:aMethod |  aMethod hasPragmaNamed: #sampleInstance]).
+	^ sampleInstancePragams flattened.
+]
+
+{ #category : #'*CommentHierarchyAnalysis' }
 Class >> testMethods [
 	
 	|testMethods|

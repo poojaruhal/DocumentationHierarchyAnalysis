@@ -1,3 +1,10 @@
+"
+I am the root class to determine where a particular class lies in the project hierarchy. 
+I have various important key messages such as:
+!caclulateProjectLevel: determines where a class lies in the hierarchy according to project scope.
+!classDepth: determines where a class lies in the heirarchy according to whole Pharo image scope.
+
+"
 Class {
 	#name : #ChaClass,
 	#superclass : #Object,
@@ -98,12 +105,17 @@ ChaClass >> isChaObject [
 
 { #category : #testing }
 ChaClass >> isLeafClassInProject [
-	^ (self isSubclassInAnotherProject)
+	^ (self isSubclassInAnotherProject) and: [ self isSuperclassInAnotherProject not ]
+]
+
+{ #category : #testing }
+ChaClass >> isOrphanClassInProject [
+	^ (self isSuperclassInAnotherProject) and: [ self isSubclassInAnotherProject ]
 ]
 
 { #category : #testing }
 ChaClass >> isRootClassInProject [
-	^ (self isSuperclassInAnotherProject)
+	^ (self isSuperclassInAnotherProject) and: [ self isSubclassInAnotherProject not ]
 ]
 
 { #category : #testing }
@@ -159,12 +171,15 @@ ChaClass >> projectLevel: aNumber [
 { #category : #accessing }
 ChaClass >> statusRootOrIntermediateOrLeaf [
 	|status|
+	self isOrphanClassInProject 
+	ifTrue: [ status := 'orphan' ]
+	ifFalse: [  
 	self isRootClassInProject 
 		ifTrue: [  status := 'root' ]
 		ifFalse: [ self isLeafClassInProject 
 			ifTrue:[ status:= 'leaf' ]
 			ifFalse: [ status := 'intermediate' ]
-			]. 
+			]]. 
 		^ status
 ]
 

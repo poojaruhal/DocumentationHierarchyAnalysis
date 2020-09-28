@@ -1,6 +1,11 @@
 Extension { #name : #RPackage }
 
 { #category : #'*CommentHierarchyAnalysis' }
+RPackage >> asChaPackage [
+	ChaPackage asChaPackage: self.
+]
+
+{ #category : #'*CommentHierarchyAnalysis' }
 RPackage >> chaPackageGroup [
 	^ (self name splitOn: '-') first
 ]

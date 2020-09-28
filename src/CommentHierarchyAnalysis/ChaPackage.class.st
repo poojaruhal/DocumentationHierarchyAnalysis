@@ -9,6 +9,20 @@ Class {
 	#category : #'CommentHierarchyAnalysis-External'
 }
 
+{ #category : #converting }
+ChaPackage class >> asChaPackage: aRPackage [
+	| aPack aRPackageClasses|
+	
+	aPack:= self new.
+	aPack name: aRPackage name.
+	aRPackageClasses := (aRPackage classes collect: [:e | ChaClass asChaClass: e]).
+	aPack classes: aRPackageClasses.
+	^ aPack.
+	
+	
+
+]
+
 { #category : #adding }
 ChaPackage >> addClass: aClass [
 	classes add: aClass
@@ -84,16 +98,6 @@ ChaPackage >> name [
 { #category : #accessing }
 ChaPackage >> name: anObject [
 	name := anObject
-]
-
-{ #category : #accessing }
-ChaPackage >> organization [
-	^ organization
-]
-
-{ #category : #accessing }
-ChaPackage >> organization: anObject [
-	organization := anObject
 ]
 
 { #category : #'gt-extension' }

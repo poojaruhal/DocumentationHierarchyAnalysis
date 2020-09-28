@@ -1,6 +1,11 @@
 Extension { #name : #Class }
 
 { #category : #'*CommentHierarchyAnalysis' }
+Class >> asChaClass [ 
+	ChaClass asChaClass: self.
+]
+
+{ #category : #'*CommentHierarchyAnalysis' }
 Class >> collectExampleMethods [
 	
 	|examples|

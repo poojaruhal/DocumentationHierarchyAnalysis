@@ -15,10 +15,27 @@ Class {
 		'package',
 		'comment',
 		'classDepth',
-		'projectLevel'
+		'projectLevel',
+		'organization'
 	],
 	#category : #'CommentHierarchyAnalysis-External'
 }
+
+{ #category : #converting }
+ChaClass class >> asChaClass: aClass [
+	"aClass"
+	|aChaClass|
+	aChaClass := self new.
+	aChaClass name: aClass name.
+	aChaClass subclasses: aClass subclasses.
+	aChaClass superclass: aClass superclass.
+	aChaClass package: aClass package name.
+	aChaClass comment: aClass comment.
+	aChaClass classDepth: aClass classDepth.
+	aChaClass organization: aClass organization.
+	aChaClass  projectLevel: 0.	
+	^ aChaClass.
+]
 
 { #category : #accessing }
 ChaClass >> allSuperclasses [
@@ -141,6 +158,17 @@ ChaClass >> name [
 { #category : #accessing }
 ChaClass >> name: anObject [
 	name := anObject
+]
+
+{ #category : #accessing }
+ChaClass >> organization [
+	^ organization.
+
+]
+
+{ #category : #accessing }
+ChaClass >> organization: anObject. [
+	organization := anObject.
 ]
 
 { #category : #accessing }

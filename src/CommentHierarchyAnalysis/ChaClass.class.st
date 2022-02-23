@@ -1,8 +1,16 @@
 "
 I am the root class to determine where a particular class lies in the project hierarchy. 
+The class can be as a root class, orphan class, intermediate class, or leaf class. 
+- A root class is a class at the top of the hierarchy in the project. The class does not have a superclass in the current project.
+- A orphan class does not have a superclass or a subclass in the current project.
+- An intermediate class does have a superclass and a subclass as well.
+- A leaf class does not have a subclass within the project.
+
 I have various important key messages such as:
-!caclulateProjectLevel: determines where a class lies in the hierarchy according to project scope.
-!classDepth: determines where a class lies in the heirarchy according to whole Pharo image scope.
+ !caclulateProjectLevel: determines where a class lies in the hierarchy according to the project scope.
+!classDepth: determines where a class lies in the hierarchy according to whole Pharo image scope.
+!statusRootOrIntermediateOrLeaf: determines if the class is a root, orphan, intermediate, or leaf class.
+
 
 "
 Class {
@@ -167,7 +175,7 @@ ChaClass >> organization [
 ]
 
 { #category : #accessing }
-ChaClass >> organization: anObject. [
+ChaClass >> organization: anObject [.
 	organization := anObject.
 ]
 

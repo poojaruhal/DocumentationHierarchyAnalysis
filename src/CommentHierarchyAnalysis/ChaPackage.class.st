@@ -1,3 +1,10 @@
+"
+Class: ChaPackage
+                                                                                                    
+
+The package a class belongs to.
+
+"
 Class {
 	#name : #ChaPackage,
 	#superclass : #Object,

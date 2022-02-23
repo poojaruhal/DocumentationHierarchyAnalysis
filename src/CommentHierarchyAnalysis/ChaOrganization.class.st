@@ -38,6 +38,12 @@ data := STONJSON fromStream: 'classes.json' asFileReference readStream.
 organization := ChaOrganization fromData: data.
 organization
 ]]]
+
+The organization can be instantiated from the current Smalltalk image.
+[ [ [ 
+|organization|
+organization := ChaImageOrganization fromEnvironment: (Smalltalk image).
+] ] ]
 "
 Class {
 	#name : #ChaOrganization,
